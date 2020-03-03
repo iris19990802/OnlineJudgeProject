@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iris.java.onlinejudge.judger.mapper.LanguageMapper" >
+  <resultMap id="BaseResultMap" type="com.iris.java.onlinejudge.judger.pojo.Language" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="language_id" property="languageId" jdbcType="INTEGER" />
+    <result column="langurage_name" property="langurageName" jdbcType="VARCHAR" />
+    <result column="language_compile_command" property="languageCompileCommand" jdbcType="VARCHAR" />
+    <result column="language_run_command" property="languageRunCommand" jdbcType="VARCHAR" />
+  </resultMap>
+</mapper>

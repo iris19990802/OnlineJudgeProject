@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iris.java.onlinejudge.judger.mapper.JudgeResultCategoryMapper" >
+  <resultMap id="BaseResultMap" type="com.iris.java.onlinejudge.judger.pojo.JudgeResultCategory" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="result_category_id" property="resultCategoryId" jdbcType="INTEGER" />
+    <result column="simplified_name" property="simplifiedName" jdbcType="VARCHAR" />
+    <result column="complete_name" property="completeName" jdbcType="VARCHAR" />
+  </resultMap>
+</mapper>

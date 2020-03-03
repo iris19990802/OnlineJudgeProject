@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iris.java.onlinejudge.judger.mapper.ProblemsMapper" >
+  <resultMap id="BaseResultMap" type="com.iris.java.onlinejudge.judger.pojo.Problems" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="problem_id" property="problemId" jdbcType="BIGINT" />
+    <result column="problem_name" property="problemName" jdbcType="VARCHAR" />
+    <result column="problem_time_limit" property="problemTimeLimit" jdbcType="INTEGER" />
+    <result column="problem_memory_limit" property="problemMemoryLimit" jdbcType="INTEGER" />
+    <result column="problem_description" property="problemDescription" jdbcType="LONGVARCHAR" />
+  </resultMap>
+</mapper>

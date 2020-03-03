@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iris.java.onlinejudge.judger.mapper.SubmissionMapper" >
+  <resultMap id="BaseResultMap" type="com.iris.java.onlinejudge.judger.pojo.Submission" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="submission_id" property="submissionId" jdbcType="VARCHAR" />
+    <result column="problem_id" property="problemId" jdbcType="VARCHAR" />
+    <result column="language_id" property="languageId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="submit_time" property="submitTime" jdbcType="TIMESTAMP" />
+    <result column="user_code" property="userCode" jdbcType="LONGVARCHAR" />
+  </resultMap>
+</mapper>
