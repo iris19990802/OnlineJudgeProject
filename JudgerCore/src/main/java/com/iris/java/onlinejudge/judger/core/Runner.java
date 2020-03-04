@@ -5,7 +5,7 @@ import com.iris.java.onlinejudge.judger.pojo.bean.TaskCase;
 public class Runner {
 
 
-    public void getRunningResultOneCase(TaskCase taskCase);
+    //public void getRunningResultOneCase(TaskCase taskCase);
 
 
 }

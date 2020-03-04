@@ -6,4 +6,8 @@ package com.iris.java.onlinejudge.judger.messenger;
 
 
 public class KafkaMessageReceiverImpl implements  MessageReceiver{
+    @Override
+    public void newSubmissionHandler() {
+
+    }
 }

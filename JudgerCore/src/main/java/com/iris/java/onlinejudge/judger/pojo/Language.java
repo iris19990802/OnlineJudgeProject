@@ -1,6 +1,8 @@
 package com.iris.java.onlinejudge.judger.pojo;
 
 import javax.persistence.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Language {
     /**
@@ -27,6 +29,23 @@ public class Language {
      */
     @Column(name = "language_run_command")
     private String languageRunCommand;
+
+    /**
+     * 获取代码文件的后缀名.
+     * @return 代码文件的后缀名
+     */
+    public String getCodeFileSuffix() {
+        String compileCommand = this.languageCompileCommand;
+
+        Pattern pattern = Pattern.compile("\\{filename\\}\\.((?!exe| ).)+");
+        Matcher matcher = pattern.matcher(compileCommand);
+
+        if ( matcher.find() ) {
+            String sourceFileName = matcher.group();
+            return sourceFileName.replaceAll("\\{filename\\}\\.", "");
+        }
+        return "";
+    }
 
     /**
      * 获取language_id
