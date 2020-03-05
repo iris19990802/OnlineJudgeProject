@@ -114,8 +114,8 @@ public class CommandExecutor implements Executor{
         // 解析"标准输出"的内容
         JSONObject json = JSON.parseObject(execResult.getStdout());
         Integer status = json.getInteger("status");
-        Integer timeUsed = json.getInteger("timeUsed");
-        Integer memoryUsed = json.getInteger("memoryUsed");
+        Long timeUsed = json.getLong("timeUsed");
+        Long memoryUsed = json.getLong("memoryUsed");
 
         // 如果"标准错误"不为空，也记录错误数据
         String errorMsg = execResult.getError();
@@ -153,7 +153,6 @@ public class CommandExecutor implements Executor{
         }
     }
 
-
     @Value("${commandexecutor.exexWaitTime}")
     Integer EXEC_WAIT_TIME;
 
@@ -169,11 +168,8 @@ public class CommandExecutor implements Executor{
     @Value("${commandexecutor.defaultOutputFile}")
     String DEFAULT_OUTPUT_FILE;
 
-
     @Value("${judger.coreScriptLocation}")
     String CORE_SCRIPT_PATH;
-
-
 
 }
 

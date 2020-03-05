@@ -8,16 +8,16 @@ public enum JudgeResultTag {
     MLE(3 , "MLE", "Memory Limit Exceed"),
     WA(4 , "WA", "Wrong Answer"),
     RE(5 , "RE", "Runtime Error"),
-    OLE(6 , "OLE", "Output Limit Exceed"),
+    OLE(6 , "OLE", "Output Limit Exceed"), // TODO
     CE(7 , "CE", "Compile Error"),
-    SE(8 , "SE", "System Error");
+    SE(8 , "SE", "System Error"); // TODO
 
-    public final Integer type;
+    public final Integer value;
     public final String tag;
     public final String completeName;
 
-    JudgeResultTag(Integer type, String tag,String completeName){
-        this.type = type;
+    JudgeResultTag(Integer value, String tag, String completeName){
+        this.value = value;
         this.tag = tag;
         this.completeName = completeName;
     }

@@ -9,26 +9,26 @@ public class SubmissionResult {
      * submission_id 与submission_id一一对应
      */
     @Id
-    @Column(name = "result_id")
-    private String resultId;
+    @Column(name = "submission_id")
+    private String submissionId;
 
     /**
      * submission_used_time 程序消耗时间
      */
     @Column(name = "result_used_time")
-    private Integer resultUsedTime;
+    private Long resultUsedTime;
 
     /**
      * submission_used_memory 程序消耗内存
      */
     @Column(name = "result_used_memory")
-    private Integer resultUsedMemory;
+    private Long resultUsedMemory;
 
     /**
      * submission_category_id 运行结果（WA/AC/)
      */
     @Column(name = "result_category_id")
-    private Integer resultCategoryId;
+    private Integer resultStatus;
 
     /**
      * submission_score 最终分数
@@ -42,22 +42,12 @@ public class SubmissionResult {
     @Column(name = "excute_start_time")
     private Date excuteStartTime;
 
-    /**
-     * 获取submission_id 与submission_id一一对应
-     *
-     * @return result_id - submission_id 与submission_id一一对应
-     */
-    public String getResultId() {
-        return resultId;
+    public String getSubmissionId() {
+        return submissionId;
     }
 
-    /**
-     * 设置submission_id 与submission_id一一对应
-     *
-     * @param resultId submission_id 与submission_id一一对应
-     */
-    public void setResultId(String resultId) {
-        this.resultId = resultId;
+    public void setSubmissionId(String submissionId) {
+        this.submissionId = submissionId;
     }
 
     /**
@@ -65,7 +55,7 @@ public class SubmissionResult {
      *
      * @return result_used_time - submission_used_time 程序消耗时间
      */
-    public Integer getResultUsedTime() {
+    public Long getResultUsedTime() {
         return resultUsedTime;
     }
 
@@ -74,7 +64,7 @@ public class SubmissionResult {
      *
      * @param resultUsedTime submission_used_time 程序消耗时间
      */
-    public void setResultUsedTime(Integer resultUsedTime) {
+    public void setResultUsedTime(Long resultUsedTime) {
         this.resultUsedTime = resultUsedTime;
     }
 
@@ -83,7 +73,7 @@ public class SubmissionResult {
      *
      * @return result_used_memory - submission_used_memory 程序消耗内存
      */
-    public Integer getResultUsedMemory() {
+    public Long getResultUsedMemory() {
         return resultUsedMemory;
     }
 
@@ -92,7 +82,7 @@ public class SubmissionResult {
      *
      * @param resultUsedMemory submission_used_memory 程序消耗内存
      */
-    public void setResultUsedMemory(Integer resultUsedMemory) {
+    public void setResultUsedMemory(Long resultUsedMemory) {
         this.resultUsedMemory = resultUsedMemory;
     }
 
@@ -101,17 +91,17 @@ public class SubmissionResult {
      *
      * @return result_category_id - submission_category_id 运行结果（WA/AC/)
      */
-    public Integer getResultCategoryId() {
-        return resultCategoryId;
+    public Integer getResultStatus() {
+        return resultStatus;
     }
 
     /**
      * 设置submission_category_id 运行结果（WA/AC/)
      *
-     * @param resultCategoryId submission_category_id 运行结果（WA/AC/)
+     * @param resultStatus submission_category_id 运行结果（WA/AC/)
      */
-    public void setResultCategoryId(Integer resultCategoryId) {
-        this.resultCategoryId = resultCategoryId;
+    public void setResultStatus(Integer resultStatus) {
+        this.resultStatus = resultStatus;
     }
 
     /**

@@ -34,7 +34,6 @@ public class Task implements Iterable<TaskCase>{
 
     private String userCodeFileName;
 
-
     private String checkpointFileDir; // 测试点Case 的 input、output文件所在目录
 
     private Language language;
@@ -89,7 +88,9 @@ public class Task implements Iterable<TaskCase>{
         String userFileLocation = String.format("%s/%s",new Object[] {workDir, userCodeFileName});
 
         String compileCommand = language.getLanguageCompileCommand().replace("{filename}",userFileLocation);
-        String runningCommand = language.getLanguageRunCommand().replace("{filename}",userFileLocation);
+        //String runningCommand = language.getLanguageRunCommand().replace("{filename}",userFileLocation);
+        String runningCommand = language.getLanguageRunCommand().replace("{filedir}",workDir);
+        runningCommand = runningCommand.replace("{filename}",userCodeFileName);
 
         String inputFilePath = String.format("%s/input#%s.txt",
                 new Object[] { checkpointFileDir, caseId}); // checkpoint in 文件的位置
@@ -100,7 +101,9 @@ public class Task implements Iterable<TaskCase>{
         String stdOutputFilePath = String.format("%s/output#%s.txt",
                 new Object[] { checkpointFileDir, caseId }); // checkpoint out 文件的位置
 
-        return new TaskCase(compileCommand, runningCommand, inputFilePath, outputFilePath, stdOutputFilePath);
+        Integer score = problemCases.get(caseId).getCheckpointScore();
+
+        return new TaskCase(compileCommand, runningCommand, inputFilePath, outputFilePath, stdOutputFilePath,score);
 
 
     }

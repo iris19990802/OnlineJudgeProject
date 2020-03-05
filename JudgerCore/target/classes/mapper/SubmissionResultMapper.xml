@@ -5,7 +5,7 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="result_id" property="resultId" jdbcType="VARCHAR" />
+    <id column="submission_id" property="submissionId" jdbcType="VARCHAR" />
     <result column="result_used_time" property="resultUsedTime" jdbcType="INTEGER" />
     <result column="result_used_memory" property="resultUsedMemory" jdbcType="INTEGER" />
     <result column="result_category_id" property="resultCategoryId" jdbcType="INTEGER" />

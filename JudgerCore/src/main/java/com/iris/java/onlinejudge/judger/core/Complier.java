@@ -24,23 +24,24 @@ public class Complier {
     @Autowired
     Executor executor;
 
-    public void compile(Task task){
+    public boolean compile(Task task){
 
 
         ExecuteResult compileResult =  getCompileResult(task);
 
-        NotifyMessage message = parseNotifyMessage(compileResult);
+
+        //TODO：编译成功？编译失败？
+        if(compileResult.isError()){// 如果编译失败，返回false，封装失败信息，并直接通知Task结束
+
+            return false;
+        }
 
         //TODO: 封装编译信息
 
-        //TODO: 返回消息队列，通知用户
+        //TODO: 调用ApplicationNotifier，通知用户
 
-        return ;
+        return true;
 
-    }
-
-    private NotifyMessage parseNotifyMessage(ExecuteResult compileResult) {
-        return null;
     }
 
     // 暂时没有收集编译信息，只按照"普通的命令"来处理

@@ -1,6 +1,32 @@
 package com.iris.java.onlinejudge.judger.pojo.bean;
 
 // 用于消息队列封装信息
-public class NotifyMessage {
-    // TODO : 消息队列封装信息的格式定义
+
+public class NotifyMessage<T> {
+
+    // TODO : 是否需要定义错误时的返回方式？（this.error()）
+
+    private Integer eventId; // 事件类型（枚举类）
+
+    private T data;// 具体数据（泛型）
+
+
+    public NotifyMessage(Integer eventId, T data) {
+        this.eventId = eventId;
+        this.data = data;
+    }
+
+    /**
+     * 业务正常时返回的消息
+     * (即使Case出了问题，也是属于正常业务范围内的)
+     * @param data
+     * @param <T>
+     * @return
+     */
+    public static <T> NotifyMessage<T> normal(Integer eventId,T data){
+        return new NotifyMessage<T>(eventId,data);
+    }
+
+
+
 }
