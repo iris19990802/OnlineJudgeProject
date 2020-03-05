@@ -1,4 +1,4 @@
-package com.iris.java.onlinejudge.judger.pojo.bean;
+package com.iris.java.onlinejudge.judger.utils;
 
 
 import com.iris.java.onlinejudge.judger.core.Preprocessor;
@@ -8,6 +8,7 @@ import com.iris.java.onlinejudge.judger.mapper.normal.ProblemsMapper;
 import com.iris.java.onlinejudge.judger.pojo.Language;
 import com.iris.java.onlinejudge.judger.pojo.ProblemCase;
 import com.iris.java.onlinejudge.judger.pojo.Problems;
+import com.iris.java.onlinejudge.judger.pojo.bean.Task;
 import com.iris.java.onlinejudge.judger.pojo.bo.SubmissionBO;
 import com.iris.java.onlinejudge.judger.utils.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,8 @@ public class TaskFactory {
 
         String workDir = WORK_DIR_PATH_TEMPLATE.replace("SUBMISSION_ID",submissionId);
 
-        String userCodeFileName = DigestUtils.getRandomString(12, DigestUtils.Mode.ALPHA);
+        //String userCodeFileName = DigestUtils.getRandomString(12, DigestUtils.Mode.ALPHA);
+        String userCodeFileName = "Main";
 
         String checkpointFileDir =  CHECKPOINT_DIR_PATH_TEMPLATE.replace("PROBLEM_ID",problems.getProblemId().toString());
 

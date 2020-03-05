@@ -4,11 +4,12 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 
 @Component
-public class FileUtils {
+public class MyFileUtils {
 
 
     /**
@@ -18,29 +19,39 @@ public class FileUtils {
      * @param filePath
      * @param fileContent
      */
-    public void createNewFileRecursive(String filePath,String fileContent){
+    public void createNewFileRecursive(String filePath,String fileContent) throws Exception {
 
         File file = new File(filePath);
 
-        if(!file.getParentFile().exists()){
-            try {
 
-                // 先验证父目录是否存在
-                setFatherDirectory(file.getParentFile());
+        // 先验证父目录是否存在
+        setFatherDirectory(file.getParentFile());
 
-                // 写入文件
-                //（apache commons io库，让文件读写更便捷）
-                FileOutputStream outputStream = new FileOutputStream(new File(filePath));
-                IOUtils.write(fileContent, outputStream);
-                IOUtils.closeQuietly(outputStream);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        // 写入文件
+        //（apache commons io库，让文件读写更便捷）
+        FileOutputStream outputStream = new FileOutputStream(new File(filePath));
+        IOUtils.write(fileContent, outputStream);
+        IOUtils.closeQuietly(outputStream);
 
     }
 
+
+    /**
+     * 读取任意文件的内容（输出 String 字符串）
+     * @param filePath
+     * @return
+     * @throws Exception
+     */
+    public String readFileContent(String filePath) throws Exception {
+
+        FileInputStream inputStream = new FileInputStream(filePath);
+
+        String fileContent = IOUtils.toString(inputStream);
+
+        inputStream.close();
+
+        return fileContent;
+    }
 
     /**
      * 创建目录 && 设置权限
@@ -54,9 +65,7 @@ public class FileUtils {
                 // TODO: 改成抛异常
                 System.out.println("Failed to create directory: " +  parentFileDir.getPath());
             }
-
         }
-
         setWorkDirectoryPermission(parentFileDir);
     }
 

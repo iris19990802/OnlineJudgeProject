@@ -123,6 +123,14 @@
             <version>1.2.12</version>
         </dependency>
 
+        <!-- JSON 解析工具 -->
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.51</version>
+        </dependency>
+
     </dependencies>
 
 </project>

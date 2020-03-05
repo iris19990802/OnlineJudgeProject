@@ -121,9 +121,19 @@ public class Task implements Iterable<TaskCase>{
      * 返回用户提交的代码所存储的"完整路径"（以"工作目录为基准生成"）(带语言后缀名".java")
      * @return
      */
-    public String getUserCodeFileSavePath(){
+    public String getUserCodeFileSavePathComplete(){
         String codeFilePath = String.format("%s/%s.%s",
                 new Object[] {workDir, userCodeFileName, language.getCodeFileSuffix()});
+        return codeFilePath;
+    }
+
+    /**
+     * 返回用户提交的代码所存储的"完整路径"（不带后缀）
+     * @return
+     */
+    public String getUserCodeFileSavePathNoSuffix(){
+        String codeFilePath = String.format("%s/%s",
+                new Object[] {workDir, userCodeFileName});
         return codeFilePath;
     }
 
