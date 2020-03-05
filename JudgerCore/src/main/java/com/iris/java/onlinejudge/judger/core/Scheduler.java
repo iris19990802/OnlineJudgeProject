@@ -69,7 +69,7 @@ public class Scheduler {
      */
     // TODO: 并发与同步问题（目录、文件为共享资源）
     private void cleanDir(Task newTask) {
-        String path1 = String.format("%s/%s" ,newTask.getWorkDir(),newTask.getSubmissionId());
+        String path1 = newTask.getWorkDir();
         File dir1 = new File(path1);
         if(dir1.exists()){
             try{
@@ -79,8 +79,8 @@ public class Scheduler {
             }
         }
 
-        String path2 = String.format("%s/testpoints/%s" ,newTask.getWorkDir(),newTask.getProblems().getProblemId());
-        File dir2 = new File(path1);
+        String path2 = newTask.getCheckpointFileDir();
+        File dir2 = new File(path2);
         if(dir2.exists()){
             try{
                 myFileUtils.deleteDirectory(dir2);
@@ -89,6 +89,7 @@ public class Scheduler {
             }
         }
     }
+
 
 
 }
