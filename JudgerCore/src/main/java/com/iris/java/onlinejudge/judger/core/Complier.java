@@ -3,9 +3,8 @@ package com.iris.java.onlinejudge.judger.core;
 
 import com.iris.java.onlinejudge.judger.Execute.Executor;
 import com.iris.java.onlinejudge.judger.application.ApplicationNotifier;
-import com.iris.java.onlinejudge.judger.pojo.bean.ExecuteResult;
-import com.iris.java.onlinejudge.judger.pojo.bean.NotifyMessage;
-import com.iris.java.onlinejudge.judger.pojo.bean.Task;
+import com.iris.java.onlinejudge.judger.pojo.bean.*;
+import com.iris.java.onlinejudge.judger.utils.Enums.JudgeResultTag;
 import com.iris.java.onlinejudge.judger.utils.MyFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,21 +25,24 @@ public class Complier {
 
     public boolean compile(Task task){
 
-
+        applicationNotifier.onCompileStart(task.getSubmissionId());
         ExecuteResult compileResult =  getCompileResult(task);
 
-
-        //TODO：编译成功？编译失败？
+        // 用于封装编译结果
+        ResultTask resultTask = new ResultTask();
         if(compileResult.isError()){// 如果编译失败，返回false，封装失败信息，并直接通知Task结束
+            resultTask.setErrorMsg(compileResult.getErrorMsg());
+            resultTask.setResultStatus(JudgeResultTag.CE.value);
+        }
+        else{
+            resultTask.setResultStatus(JudgeResultTag.PD.value); // 如果编译成功，则继续往下，此Case暂时还没完（Pending）
 
-            return false;
         }
 
-        //TODO: 封装编译信息
+        // notify
+        applicationNotifier.onCompileFinished(resultTask,task.getSubmissionId());
 
-        //TODO: 调用ApplicationNotifier，通知用户
-
-        return true;
+        return (!compileResult.isError());
 
     }
 

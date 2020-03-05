@@ -1,12 +1,10 @@
 package com.iris.java.onlinejudge.judger.utils;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.*;
 
 @Component
 public class MyFileUtils {
@@ -76,5 +74,9 @@ public class MyFileUtils {
      */
     public void setWorkDirectoryPermission(File workDirectory){
         ;
+    }
+
+    public void deleteDirectory(File dir) throws IOException {
+        FileUtils.deleteDirectory(dir);
     }
 }

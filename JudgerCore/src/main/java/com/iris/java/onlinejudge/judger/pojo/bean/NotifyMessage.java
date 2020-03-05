@@ -8,10 +8,16 @@ public class NotifyMessage<T> {
 
     private Integer eventId; // 事件类型（枚举类）
 
+    private String submissionId; //提交id
+
+    private Integer status; //正在评测的submission的状态(Pending? AC/CE/WA...?)
+
     private T data;// 具体数据（泛型）
 
 
-    public NotifyMessage(Integer eventId, T data) {
+    public NotifyMessage(Integer eventId,String submissionId,Integer status, T data) {
+        this.status = status;
+        this.submissionId = submissionId;
         this.eventId = eventId;
         this.data = data;
     }
@@ -23,8 +29,8 @@ public class NotifyMessage<T> {
      * @param <T>
      * @return
      */
-    public static <T> NotifyMessage<T> normal(Integer eventId,T data){
-        return new NotifyMessage<T>(eventId,data);
+    public static <T> NotifyMessage<T> normal(Integer eventId,String submissionId, Integer status, T data){
+        return new NotifyMessage<T>(eventId,submissionId,status,data);
     }
 
 

@@ -6,6 +6,7 @@ import com.iris.java.onlinejudge.judger.pojo.bean.Task;
 import com.iris.java.onlinejudge.judger.pojo.bean.TaskCase;
 import com.iris.java.onlinejudge.judger.utils.MyFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import java.util.List;
 
@@ -28,6 +29,10 @@ public class Preprocessor {
             // 创建 userCode 文件（用户提交的代码）
             String userCodePath = task.getUserCodeFileSavePathComplete();
             myFileUtils.createNewFileRecursive(userCodePath,userCode);
+
+            // 创建 default 文件 TODO：这里应该被优化掉
+            myFileUtils.createNewFileRecursive(DEFAULT_INPUT_FILE,"");
+            myFileUtils.createNewFileRecursive(DEFAULT_OUTPUT_FILE,"");
 
             // 对所有的Cases，创建input、output文件
             generateInputOutputForAllCases(task);
@@ -67,5 +72,11 @@ public class Preprocessor {
 
         }
     }
+
+    @Value("${commandexecutor.defaultInputFile}")
+    String DEFAULT_INPUT_FILE;
+
+    @Value("${commandexecutor.defaultOutputFile}")
+    String DEFAULT_OUTPUT_FILE;
 
 }

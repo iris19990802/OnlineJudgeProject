@@ -4,8 +4,6 @@ import java.util.Date;
 
 public class ResultTask {
 
-    private String submissionId;
-
     private Long resultUsedTime;
 
     private Long resultUsedMemory;
@@ -16,13 +14,8 @@ public class ResultTask {
 
     private Date excuteStartTime;
 
-    public String getSubmissionId() {
-        return submissionId;
-    }
+    private String errorMsg;
 
-    public void setSubmissionId(String submissionId) {
-        this.submissionId = submissionId;
-    }
 
     public Long getResultUsedTime() {
         return resultUsedTime;
@@ -62,5 +55,13 @@ public class ResultTask {
 
     public void setExcuteStartTime(Date excuteStartTime) {
         this.excuteStartTime = excuteStartTime;
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
     }
 }

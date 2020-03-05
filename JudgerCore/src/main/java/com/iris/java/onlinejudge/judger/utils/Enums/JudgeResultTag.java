@@ -10,7 +10,8 @@ public enum JudgeResultTag {
     RE(5 , "RE", "Runtime Error"),
     OLE(6 , "OLE", "Output Limit Exceed"), // TODO
     CE(7 , "CE", "Compile Error"),
-    SE(8 , "SE", "System Error"); // TODO
+    SE(8 , "SE", "System Error"), // TODO
+    PD(9,"PD","Pending");
 
     public final Integer value;
     public final String tag;

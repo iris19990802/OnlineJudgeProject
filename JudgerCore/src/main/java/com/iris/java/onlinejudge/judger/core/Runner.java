@@ -33,12 +33,10 @@ public class Runner {
     public void runProgramWholeTask(Task task){
 
         ResultTask resultTask = new ResultTask();
-        resultTask.setSubmissionId(task.getSubmissionId());
         resultTask.setExcuteStartTime(new Date());
         resultTask.setResultScore(0);
         resultTask.setResultUsedMemory(new Long(0));
         resultTask.setResultUsedTime(new Long(0));
-
 
         // 对 Task 里的每个 taskCase
         int i = 0;
@@ -65,14 +63,15 @@ public class Runner {
             ResultTaskCase resultTaskCase = parseCaseResultFromExecution(executeResultCase,i,taskCase);
 
             // notify: 单个Case跑完了
-            applicationNotifier.onOneCaseFinished(resultTaskCase);
+            applicationNotifier.onOneCaseFinished(resultTaskCase,task.getSubmissionId());
 
             // 如果此Case不对，直接不用往下测了
             if(!resultTaskCase.getStatus().equals(JudgeResultTag.AC.value)){
                 resultTask.setResultStatus(resultTaskCase.getStatus());
+                resultTask.setErrorMsg(resultTaskCase.getErrorMessage()); //记录错误信息
 
-                // notify：整个Case 跑完了
-                applicationNotifier.onTaskFinished(resultTask);
+                // notify：整个 Task 结束了
+                applicationNotifier.onTaskFinished(resultTask,task.getSubmissionId());
 
                 return ;
             }
@@ -83,7 +82,9 @@ public class Runner {
             }
         }
 
-        applicationNotifier.onTaskFinished(resultTask);
+        resultTask.setResultStatus(JudgeResultTag.AC.value);
+        // notify：整个 Task 结束了
+        applicationNotifier.onTaskFinished(resultTask,task.getSubmissionId());
 
     }
 
