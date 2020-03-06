@@ -1,8 +1,11 @@
 package com.iris.java.onlinejudge.judger.messenger;
 
-import com.iris.java.onlinejudge.judger.pojo.bean.NotifyMessage;
+import com.iris.java.onlinejudge.judger.pojo.message.HeartbeatNotifyMessage;
+import com.iris.java.onlinejudge.judger.pojo.message.SubmissionNotifyMessage;
 
 public interface MessageSender {
 
-    public void messageSender(NotifyMessage message);
+    public void judgeResultSender(SubmissionNotifyMessage message);
+
+    public void heartbeatSender(HeartbeatNotifyMessage message);
 }

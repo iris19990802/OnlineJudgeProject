@@ -3,8 +3,9 @@ package com.iris.java.onlinejudge.judger.application;
 
 import com.iris.java.onlinejudge.judger.mapper.normal.SubmissionResultMapper;
 import com.iris.java.onlinejudge.judger.messenger.MessageSender;
-import com.iris.java.onlinejudge.judger.pojo.SubmissionResult;
+import com.iris.java.onlinejudge.judger.pojo.db.SubmissionResult;
 import com.iris.java.onlinejudge.judger.pojo.bean.*;
+import com.iris.java.onlinejudge.judger.pojo.message.SubmissionNotifyMessage;
 import com.iris.java.onlinejudge.judger.utils.Enums.EventTag;
 import com.iris.java.onlinejudge.judger.utils.Enums.JudgeResultTag;
 import org.springframework.beans.BeanUtils;
@@ -25,15 +26,21 @@ public class ApplicationNotifier {
      * @param submissionId
      */
     public void onSubmissionCreated(String submissionId){
-        NotifyMessage<String> message = NotifyMessage.normal(
+
+        SubmissionNotifyMessage<String> message = SubmissionNotifyMessage.normal(
                 EventTag.SubmissionCreated.value,submissionId,JudgeResultTag.PD.value,"start handling ...");
+
+        messageSender.judgeResultSender(message);
     }
     /**
      * 编译开始时触发(显示：Compling...)
      */
     public void onCompileStart(String submissionId){
-        NotifyMessage<String> message = NotifyMessage.normal(
+
+        SubmissionNotifyMessage<String> message = SubmissionNotifyMessage.normal(
                 EventTag.CompileStart.value,submissionId,JudgeResultTag.PD.value,"Compling ...");
+
+        messageSender.judgeResultSender(message);
     }
 
     /**
@@ -42,8 +49,11 @@ public class ApplicationNotifier {
      * @param resultTask
      */
     public void onCompileFinished(ResultTask resultTask,String submissionId){
-        NotifyMessage<ResultTask> message = NotifyMessage.normal(
+
+        SubmissionNotifyMessage<ResultTask> message = SubmissionNotifyMessage.normal(
                 EventTag.CompileFinished.value,submissionId,resultTask.getResultStatus(),resultTask);
+
+        messageSender.judgeResultSender(message);
     }
 
 
@@ -54,8 +64,10 @@ public class ApplicationNotifier {
      */
     public void onOneCaseFinished(ResultTaskCase resultCase,String submissionId){
 
-        NotifyMessage<ResultTaskCase> message = NotifyMessage.normal(
+        SubmissionNotifyMessage<ResultTaskCase> message = SubmissionNotifyMessage.normal(
                 EventTag.OneCaseFinished.value,submissionId,JudgeResultTag.PD.value,resultCase);
+
+        messageSender.judgeResultSender(message);
     }
 
     /**
@@ -72,8 +84,10 @@ public class ApplicationNotifier {
         // 持久化入数据库
         submissionResultMapper.insert(submissionResult);
 
-        NotifyMessage<ResultTask> message = NotifyMessage.normal(
+        SubmissionNotifyMessage<ResultTask> message = SubmissionNotifyMessage.normal(
                 EventTag.TaskFinished.value,submissionId,resultTask.getResultStatus(),resultTask);
+
+        messageSender.judgeResultSender(message);
 
     }
 

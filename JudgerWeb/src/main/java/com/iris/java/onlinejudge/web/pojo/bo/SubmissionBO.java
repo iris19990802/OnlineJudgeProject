@@ -1,4 +1,4 @@
-package com.iris.java.onlinejudge.judger.pojo.bo;
+package com.iris.java.onlinejudge.web.pojo.bo;
 
 
 // lombok 库的使用（免去Getter、Setter、构造函数）
@@ -19,6 +19,7 @@ public class SubmissionBO implements Serializable {
     private Integer languageId;
 
     private Date submitDate;
+
 
     public String getSubmissionId() {
         return submissionId;

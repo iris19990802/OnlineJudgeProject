@@ -1,19 +1,9 @@
 package com.iris.java.onlinejudge.judger.pojo.bean;
 
 
-import com.iris.java.onlinejudge.judger.core.Preprocessor;
-import com.iris.java.onlinejudge.judger.mapper.normal.LanguageMapper;
-import com.iris.java.onlinejudge.judger.mapper.normal.ProblemCaseMapper;
-import com.iris.java.onlinejudge.judger.mapper.normal.ProblemsMapper;
-import com.iris.java.onlinejudge.judger.pojo.Language;
-import com.iris.java.onlinejudge.judger.pojo.ProblemCase;
-import com.iris.java.onlinejudge.judger.pojo.Problems;
-import com.iris.java.onlinejudge.judger.pojo.bo.SubmissionBO;
-import com.iris.java.onlinejudge.judger.utils.DigestUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import tk.mybatis.mapper.entity.Example;
+import com.iris.java.onlinejudge.judger.pojo.db.Language;
+import com.iris.java.onlinejudge.judger.pojo.db.ProblemCase;
+import com.iris.java.onlinejudge.judger.pojo.db.Problems;
 
 import java.util.Iterator;
 import java.util.List;

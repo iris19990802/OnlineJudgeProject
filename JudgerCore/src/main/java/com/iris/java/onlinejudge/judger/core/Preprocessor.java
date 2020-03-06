@@ -1,7 +1,7 @@
 package com.iris.java.onlinejudge.judger.core;
 
 import com.iris.java.onlinejudge.judger.application.ApplicationNotifier;
-import com.iris.java.onlinejudge.judger.pojo.ProblemCase;
+import com.iris.java.onlinejudge.judger.pojo.db.ProblemCase;
 import com.iris.java.onlinejudge.judger.pojo.bean.Task;
 import com.iris.java.onlinejudge.judger.pojo.bean.TaskCase;
 import com.iris.java.onlinejudge.judger.utils.MyFileUtils;

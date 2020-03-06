@@ -1,4 +1,4 @@
-package com.iris.java.onlinejudge.judger.pojo;
+package com.iris.java.onlinejudge.judger.pojo.db;
 
 import java.util.Date;
 import javax.persistence.*;

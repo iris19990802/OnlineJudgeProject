@@ -11,4 +11,6 @@ controller/
 
 target/
 
-tmp-irisoj/
+workdir-irisoj/
+
+onlinejudge.web-idea/

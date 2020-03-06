@@ -1,4 +1,4 @@
-package com.iris.java.onlinejudge.judger.utils;
+package com.iris.java.onlinejudge.web.utils;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -42,7 +42,7 @@ public class Scheduler {
      * @param submissionBO
      * @throws Exception
      */
-    public void handleNewSubmission(SubmissionBO submissionBO) throws Exception{
+    public void handleNewSubmission(SubmissionBO submissionBO){
 
         // 构建 Task
         Task newTask = taskFactory.getNewTaskFromSubmissionBO(submissionBO);
