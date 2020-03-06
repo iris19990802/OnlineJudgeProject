@@ -67,6 +67,8 @@ public class Runner {
 
             // 如果此Case不对，直接不用往下测了
             if(!resultTaskCase.getStatus().equals(JudgeResultTag.AC.value)){
+                resultTask.setResultUsedMemory(Math.max(resultTask.getResultUsedMemory(),resultTaskCase.getMemoryUsed()));
+                resultTask.setResultUsedTime(Math.max(resultTask.getResultUsedTime(),resultTaskCase.getTimeUsed()));
                 resultTask.setResultStatus(resultTaskCase.getStatus());
                 resultTask.setErrorMsg(resultTaskCase.getErrorMessage()); //记录错误信息
 

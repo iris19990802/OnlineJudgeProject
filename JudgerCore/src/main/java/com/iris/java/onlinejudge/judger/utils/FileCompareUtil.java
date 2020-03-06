@@ -32,7 +32,7 @@ public class FileCompareUtil {
         else{
             // TODO: 注意修正（这里判断 PE 和 WA 的方法，是有问题的）
             String userStripe = StringUtils.deleteWhitespace(userOutput);
-            String stdStripe = StringUtils.deleteWhitespace(userOutput);
+            String stdStripe = StringUtils.deleteWhitespace(stdOutput);
 
             if(userStripe.equals(stdStripe)){
                 return JudgeResultTag.PE.value;

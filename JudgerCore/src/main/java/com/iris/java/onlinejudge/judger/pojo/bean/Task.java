@@ -99,6 +99,25 @@ public class Task implements Iterable<TaskCase>{
     }
 
     /**
+     * 得到可执行文件路径
+     *（用于判断compile是否生成可执行文件）
+     *（因为C++ 难以判断 编译 warning 和 error）
+     */
+    public String getRunningFilePath(){
+        String runningCommand = language.getLanguageRunCommand().replace("{filedir}",workDir);
+        runningCommand = runningCommand.replace("{filename}",userCodeFileName);
+
+        for(String tmp: runningCommand.split(" ")){
+            if(tmp.contains("/")){
+                return tmp;
+            }
+        }
+        return "";
+
+
+    }
+
+    /**
      * 得到编译日志所在路径（以"工作目录为基准生成"）（后缀名为.log）
      * @return
      */

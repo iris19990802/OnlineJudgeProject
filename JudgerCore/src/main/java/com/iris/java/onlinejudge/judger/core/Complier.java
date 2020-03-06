@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+
 @Component
 public class Complier {
 
@@ -30,19 +32,24 @@ public class Complier {
 
         // 用于封装编译结果
         ResultTask resultTask = new ResultTask();
-        if(compileResult.isError()){// 如果编译失败，返回false，封装失败信息，并直接通知Task结束
-            resultTask.setErrorMsg(compileResult.getErrorMsg());
+
+        // 由于C++难以区分编译warning和error（都走标准错误输出，哪怕warnning也会有errorMsg，且exitCode都是0）
+        // 这里用"是否生成可执行文件"为标准，来判断编译是否成功
+
+        File runningFile = new File(task.getRunningFilePath()); // 可执行文件路径
+        if(runningFile.exists()){
+            resultTask.setResultStatus(JudgeResultTag.PD.value); // 如果编译成功，则继续往下，此Case暂时还没完（Pending）
+        }else{
             resultTask.setResultStatus(JudgeResultTag.CE.value);
         }
-        else{
-            resultTask.setResultStatus(JudgeResultTag.PD.value); // 如果编译成功，则继续往下，此Case暂时还没完（Pending）
 
-        }
+
+
 
         // notify
         applicationNotifier.onCompileFinished(resultTask,task.getSubmissionId());
 
-        return (!compileResult.isError());
+        return runningFile.exists();
 
     }
 
@@ -57,7 +64,7 @@ public class Complier {
         ExecuteResult executeResult = null;
         try {
             executeResult = executor.normalExecute(finalCompileCommand);
-        }catch(Exception e){ // TODO: executor 出错处理
+        }catch(Exception e){ // TODO: executor 出错处理（抛异常，或者 executeResult为null？）
             e.printStackTrace();
         }
 

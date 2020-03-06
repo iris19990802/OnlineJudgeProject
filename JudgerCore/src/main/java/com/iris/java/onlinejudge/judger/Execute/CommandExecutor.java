@@ -3,7 +3,9 @@ package com.iris.java.onlinejudge.judger.Execute;
 
 import com.alibaba.fastjson.JSONObject;
 import com.iris.java.onlinejudge.judger.pojo.bean.ExecuteResult;
+import com.iris.java.onlinejudge.judger.utils.Enums.JudgeResultTag;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -98,8 +100,7 @@ public class CommandExecutor implements Executor{
             return new CommandExecuteMessage("timeOut", null);
         }
 
-
-        // 如果正常结束
+        // (Java 的编译错误会返回到"标准错误输出"，但是c++的编译错误不会。。)
         String errorStream = IOUtils.toString(exec.getErrorStream(), "utf-8"); // inputStream 读为 String 的方法 ： https://blog.csdn.net/lmy86263/article/details/60479350
         String outStream = IOUtils.toString(exec.getInputStream(), "utf-8");
 
@@ -111,16 +112,23 @@ public class CommandExecutor implements Executor{
 
     private ExecuteResult parseMessage(CommandExecuteMessage execResult){
 
-        // 解析"标准输出"的内容
-        JSONObject json = JSON.parseObject(execResult.getStdout());
-        Integer status = json.getInteger("status");
-        Long timeUsed = json.getLong("timeUsed");
-        Long memoryUsed = json.getLong("memoryUsed");
+        // 如果正常运行（标准"错误"输出为空）
+        if(StringUtils.isBlank(execResult.getError())){
 
-        // 如果"标准错误"不为空，也记录错误数据
-        String errorMsg = execResult.getError();
+            // 解析"标准输出"的内容
+            JSONObject json = JSON.parseObject(execResult.getStdout());
+            Integer status = json.getInteger("status");
+            Long timeUsed = json.getLong("timeUsed");
+            Long memoryUsed = json.getLong("memoryUsed");
 
-        return new ExecuteResult(status,timeUsed,memoryUsed,errorMsg);
+            return new ExecuteResult(status, timeUsed, memoryUsed, "");
+        }
+        // 如果 error里有东西
+        else{
+            //(比如：运行脚本 .judge_core 不存在)
+            String errorMsg = execResult.getError();
+            return new ExecuteResult(JudgeResultTag.SE.value, new Long(0), new Long(0), errorMsg);
+        }
 
     }
 
