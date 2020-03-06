@@ -30,7 +30,7 @@ public class ApplicationNotifier {
         SubmissionNotifyMessage<String> message = SubmissionNotifyMessage.normal(
                 EventTag.SubmissionCreated.value,submissionId,JudgeResultTag.PD.value,"start handling ...");
 
-        //messageSender.judgeResultSender(message);
+        messageSender.judgeResultSender(message);
     }
     /**
      * 编译开始时触发(显示：Compling...)
@@ -40,7 +40,7 @@ public class ApplicationNotifier {
         SubmissionNotifyMessage<String> message = SubmissionNotifyMessage.normal(
                 EventTag.CompileStart.value,submissionId,JudgeResultTag.PD.value,"Compling ...");
 
-        //messageSender.judgeResultSender(message);
+        messageSender.judgeResultSender(message);
     }
 
     /**
@@ -53,7 +53,7 @@ public class ApplicationNotifier {
         SubmissionNotifyMessage<ResultTask> message = SubmissionNotifyMessage.normal(
                 EventTag.CompileFinished.value,submissionId,resultTask.getResultStatus(),resultTask);
 
-        //messageSender.judgeResultSender(message);
+        messageSender.judgeResultSender(message);
     }
 
 
@@ -67,7 +67,7 @@ public class ApplicationNotifier {
         SubmissionNotifyMessage<ResultTaskCase> message = SubmissionNotifyMessage.normal(
                 EventTag.OneCaseFinished.value,submissionId,JudgeResultTag.PD.value,resultCase);
 
-        //messageSender.judgeResultSender(message);
+        messageSender.judgeResultSender(message);
     }
 
     /**
@@ -87,7 +87,7 @@ public class ApplicationNotifier {
         SubmissionNotifyMessage<ResultTask> message = SubmissionNotifyMessage.normal(
                 EventTag.TaskFinished.value,submissionId,resultTask.getResultStatus(),resultTask);
 
-        //messageSender.judgeResultSender(message);
+        messageSender.judgeResultSender(message);
 
     }
 
