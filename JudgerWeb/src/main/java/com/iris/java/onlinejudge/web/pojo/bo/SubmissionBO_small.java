@@ -14,7 +14,7 @@ public class SubmissionBO_small implements Serializable {
     @NotNull
     private String problemId;
 
-    @SafeCode
+
     private String userCode;
 
     @NotNull

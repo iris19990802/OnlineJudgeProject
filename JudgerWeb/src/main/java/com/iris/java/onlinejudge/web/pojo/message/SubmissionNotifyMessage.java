@@ -25,7 +25,7 @@ public class SubmissionNotifyMessage<T> {
 
     private Integer eventId; // 测评事件类型（枚举类），标志"显示给用户"的信息
 
-    private T data;// 具体数据（泛型）（如果状态是终态、事件是"TaskFinished/oneCaseFinished",则解析数据）
+    private T data;// 具体数据（泛型）（如果事件是"TaskFinished/oneCaseFinished",则解析数据）
 
 
     public SubmissionNotifyMessage(Integer eventId, String submissionId, Integer status, T data) {

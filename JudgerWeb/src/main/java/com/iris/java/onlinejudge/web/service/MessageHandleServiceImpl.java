@@ -1,5 +1,6 @@
 package com.iris.java.onlinejudge.web.service;
 
+import com.iris.java.onlinejudge.web.controller.websocket.SubmitIdSubscribeServer;
 import com.iris.java.onlinejudge.web.mapper.normal.SubmissionResultMapper;
 import com.iris.java.onlinejudge.web.pojo.bean.ResultTask;
 import com.iris.java.onlinejudge.web.pojo.db.SubmissionResult;
@@ -23,6 +24,9 @@ public class MessageHandleServiceImpl implements MessageHandleService{
     @Autowired
     SubmissionResultService submissionResultService;
 
+    @Autowired
+    SubmitIdSubscribeServer submitIdSubscribeServer;
+
     @Override
     public void switchMessage(SubmissionNotifyMessage submissionNotifyMessage){
 
@@ -36,6 +40,7 @@ public class MessageHandleServiceImpl implements MessageHandleService{
          * 如果是结束态(Task结束/编译错误/系统错误)，持久化到数据库
          *
          */
+
         // 首先，都是要写缓存
         redisService.set(SubmissionResultKey.getById,submissionNotifyMessage.getSubmissionId(),submissionNotifyMessage);
 
@@ -60,6 +65,9 @@ public class MessageHandleServiceImpl implements MessageHandleService{
         else if(event.equals(EventTag.SystemError.value)){
             SystemError(submissionNotifyMessage);
         }
+
+
+        submitIdSubscribeServer.sendJudgeResultBySubmissionId(submissionNotifyMessage);
 
 
     }
