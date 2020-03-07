@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Service
-public class PromblemServiceImpl implements ProblemService{
+public class ProblemServiceImpl implements ProblemService{
 
     @Autowired
     ProblemsMapper problemsMapper;

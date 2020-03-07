@@ -137,6 +137,14 @@
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
 
+
+        <!-- redis 缓存 -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+
     </dependencies>
 
 </project>

@@ -6,13 +6,13 @@ public class SubmissionNotifyMessage<T> {
 
     // TODO : 是否需要定义错误时的返回方式？（this.error()）
 
-    private Integer eventId; // 测评事件类型（枚举类）
+    private Integer eventId; // 测评事件类型（枚举类），标志"显示给用户"的信息
 
     private String submissionId; //提交id
 
-    private Integer status; //正在评测的submission的状态(Pending? AC/CE/WA...?)
+    private Integer status; //正在评测的submission的状态(Pending? AC/CE/WA...?) —————— 通过这个来判断：是否是终态
 
-    private T data;// 具体数据（泛型）
+    private T data;// 具体数据（泛型）（如果状态是终态、事件是"TaskFinished/oneCaseFinished",则解析数据）
 
 
     public SubmissionNotifyMessage(Integer eventId, String submissionId, Integer status, T data) {

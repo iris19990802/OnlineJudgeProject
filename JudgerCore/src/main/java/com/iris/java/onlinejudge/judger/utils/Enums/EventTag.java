@@ -6,10 +6,17 @@ import java.util.HashMap;
 public enum EventTag {
 
     SubmissionCreated(0, "SubmissionCreated"),
+
     CompileStart(1, "CompileStart"),
-    CompileFinished(2, "CompileFinished"),
-    OneCaseFinished(3, "OneCaseFinished"),
-    TaskFinished(4, "TaskFinished");
+    //CompileFinished(2, "CompileFinished"),
+    CompileSucceed(2, "CompileSucceed"),
+    CompileFailed(3, "CompileFailed"),
+
+    OneCaseFinished(4, "OneCaseFinished"),
+
+    TaskFinished(5, "TaskFinished"),
+
+    SystemError(56, "SystemError");
 
     public final Integer value;
     public final String eventName;

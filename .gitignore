@@ -4,6 +4,7 @@
 .DS_Store
 
 *.yml
+application.properties
 
 logs/
 

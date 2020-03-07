@@ -2,17 +2,30 @@ package com.iris.java.onlinejudge.web.pojo.message;
 
 // 用于消息队列封装信息
 
+import com.iris.java.onlinejudge.web.pojo.bean.ResultTask;
+import com.iris.java.onlinejudge.web.utils.Enums.EventTag;
+import com.iris.java.onlinejudge.web.utils.Enums.JudgeResultTag;
+
+/**
+ * 用途：
+ *
+ * 1、接收 Rabbitmq 发来的评测结果信息
+ *
+ * 2、把它传给用户端（非终态则缓存，终态则入库）
+ *
+ */
 public class SubmissionNotifyMessage<T> {
 
     // TODO : 是否需要定义错误时的返回方式？（this.error()）
 
-    private Integer eventId; // 测评事件类型（枚举类）
 
     private String submissionId; //提交id
 
-    private Integer status; //正在评测的submission的状态(Pending? AC/CE/WA...?)
+    private Integer status; //正在评测的submission的状态(Pending? AC/CE/WA...?) —————— 通过这个来判断：是否是终态
 
-    private T data;// 具体数据（泛型）
+    private Integer eventId; // 测评事件类型（枚举类），标志"显示给用户"的信息
+
+    private T data;// 具体数据（泛型）（如果状态是终态、事件是"TaskFinished/oneCaseFinished",则解析数据）
 
 
     public SubmissionNotifyMessage(Integer eventId, String submissionId, Integer status, T data) {
@@ -31,6 +44,20 @@ public class SubmissionNotifyMessage<T> {
      */
     public static <T> SubmissionNotifyMessage<T> normal(Integer eventId, String submissionId, Integer status, T data){
         return new SubmissionNotifyMessage<T>(eventId,submissionId,status,data);
+    }
+
+    /**
+     * 是否是结束消息
+     * @return
+     */
+    public boolean isEndMessage() {
+        if(status.equals(JudgeResultTag.PD.value)){
+            return false;
+        }
+        else{
+            return true;
+        }
+
     }
 
 
@@ -65,4 +92,5 @@ public class SubmissionNotifyMessage<T> {
     public void setData(T data) {
         this.data = data;
     }
+
 }

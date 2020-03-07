@@ -28,26 +28,20 @@ public class Complier {
     public boolean compile(Task task){
 
         applicationNotifier.onCompileStart(task.getSubmissionId());
-        ExecuteResult compileResult =  getCompileResult(task);
 
-        // 用于封装编译结果
-        ResultTask resultTask = new ResultTask();
+        // 执行编译
+        getCompileResult(task);
 
         // 由于C++难以区分编译warning和error（都走标准错误输出，哪怕warnning也会有errorMsg，且exitCode都是0）
         // 这里用"是否生成可执行文件"为标准，来判断编译是否成功
 
         File runningFile = new File(task.getRunningFilePath()); // 可执行文件路径
+
         if(runningFile.exists()){
-            resultTask.setResultStatus(JudgeResultTag.PD.value); // 如果编译成功，则继续往下，此Case暂时还没完（Pending）
+            applicationNotifier.onCompileSucceed(task.getSubmissionId()); // 如果编译成功，则继续往下，此Case暂时还没完（Pending）
         }else{
-            resultTask.setResultStatus(JudgeResultTag.CE.value);
+            applicationNotifier.onCompileFailed(task.getSubmissionId());
         }
-
-
-
-
-        // notify
-        applicationNotifier.onCompileFinished(resultTask,task.getSubmissionId());
 
         return runningFile.exists();
 

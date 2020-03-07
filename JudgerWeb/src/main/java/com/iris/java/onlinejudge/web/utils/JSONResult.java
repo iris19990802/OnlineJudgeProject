@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * 
+ *
  * @Title: JSONResult.java
  * @Description: 自定义响应数据结构
  * 				200：表示成功
@@ -27,7 +27,7 @@ public class JSONResult {
 
     // 响应中的数据
     private Object data;
-    
+
     @JsonIgnore
     private String ok;	// 不使用
 
@@ -38,7 +38,7 @@ public class JSONResult {
     public static JSONResult build(Integer status, String msg, Object data, String ok) {
         return new JSONResult(status, msg, data, ok);
     }
-    
+
     public static JSONResult ok(Object data) {
         return new JSONResult(data);
     }
@@ -46,23 +46,23 @@ public class JSONResult {
     public static JSONResult ok() {
         return new JSONResult(null);
     }
-    
+
     public static JSONResult errorMsg(String msg) {
         return new JSONResult(500, msg, null);
     }
-    
+
     public static JSONResult errorMap(Object data) {
         return new JSONResult(501, "error", data);
     }
-    
+
     public static JSONResult errorTokenMsg(String msg) {
         return new JSONResult(502, msg, null);
     }
-    
+
     public static JSONResult errorException(String msg) {
         return new JSONResult(555, msg, null);
     }
-    
+
     public static JSONResult errorUserQQ(String msg) {
         return new JSONResult(556, msg, null);
     }
@@ -76,7 +76,7 @@ public class JSONResult {
         this.msg = msg;
         this.data = data;
     }
-    
+
     public JSONResult(Integer status, String msg, Object data, String ok) {
         this.status = status;
         this.msg = msg;
@@ -118,12 +118,12 @@ public class JSONResult {
         this.data = data;
     }
 
-	public String getOk() {
-		return ok;
-	}
+    public String getOk() {
+        return ok;
+    }
 
-	public void setOk(String ok) {
-		this.ok = ok;
-	}
+    public void setOk(String ok) {
+        this.ok = ok;
+    }
 
 }

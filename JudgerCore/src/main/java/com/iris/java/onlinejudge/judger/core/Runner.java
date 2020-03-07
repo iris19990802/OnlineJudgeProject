@@ -62,8 +62,11 @@ public class Runner {
 
             ResultTaskCase resultTaskCase = parseCaseResultFromExecution(executeResultCase,i,taskCase);
 
+            // 把此 Case 加入Task
+            resultTask.addResultCase(resultTaskCase);
+
             // notify: 单个Case跑完了
-            applicationNotifier.onOneCaseFinished(resultTaskCase,task.getSubmissionId());
+            applicationNotifier.onOneCaseFinished(resultTask,task.getSubmissionId());
 
             // 如果此Case不对，直接不用往下测了
             if(!resultTaskCase.getStatus().equals(JudgeResultTag.AC.value)){

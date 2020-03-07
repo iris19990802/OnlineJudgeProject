@@ -1,10 +1,8 @@
-package com.iris.java.onlinejudge.judger.pojo.bean;
+package com.iris.java.onlinejudge.web.pojo.bean;
 
 import java.util.Date;
-import java.util.List;
 
 public class ResultTask {
-
 
     private Long resultUsedTime;
 
@@ -18,22 +16,6 @@ public class ResultTask {
 
     private String errorMsg;
 
-    private Integer currentTaskCase;
-
-    private List<ResultTaskCase> resultTaskCaseList;
-
-
-    public void addResultCase(ResultTaskCase resultTaskCase){
-        this.resultTaskCaseList.add(resultTaskCase);
-    }
-
-    public Integer getCurrentTaskCase() {
-        return currentTaskCase;
-    }
-
-    public void setCurrentTaskCase(Integer currentTaskCase) {
-        this.currentTaskCase = currentTaskCase;
-    }
 
     public Long getResultUsedTime() {
         return resultUsedTime;
@@ -81,13 +63,5 @@ public class ResultTask {
 
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
-    }
-
-    public List<ResultTaskCase> getResultTaskCaseList() {
-        return resultTaskCaseList;
-    }
-
-    public void setResultTaskCaseList(List<ResultTaskCase> resultTaskCaseList) {
-        this.resultTaskCaseList = resultTaskCaseList;
     }
 }

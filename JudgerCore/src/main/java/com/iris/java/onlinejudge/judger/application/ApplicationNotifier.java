@@ -12,6 +12,12 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+
+/**
+ * 只有TaskFinished返回 ResultTask 对象
+ * 其他都返回字符串（代表提示信息）
+ *
+ */
 @Component
 public class ApplicationNotifier {
 
@@ -26,7 +32,6 @@ public class ApplicationNotifier {
      * @param submissionId
      */
     public void onSubmissionCreated(String submissionId){
-
         SubmissionNotifyMessage<String> message = SubmissionNotifyMessage.normal(
                 EventTag.SubmissionCreated.value,submissionId,JudgeResultTag.PD.value,"start handling ...");
 
@@ -44,14 +49,25 @@ public class ApplicationNotifier {
     }
 
     /**
-     * 编译完成时触发(显示：running on task1 ...)
-     * 编译成功？编译失败？(看返回的resultTask里的status值)
-     * @param resultTask
+     * 编译成功时触发(显示：running on task1 ...)
+     *
      */
-    public void onCompileFinished(ResultTask resultTask,String submissionId){
+    public void onCompileSucceed(String submissionId){
 
-        SubmissionNotifyMessage<ResultTask> message = SubmissionNotifyMessage.normal(
-                EventTag.CompileFinished.value,submissionId,resultTask.getResultStatus(),resultTask);
+        SubmissionNotifyMessage<String> message = SubmissionNotifyMessage.normal(
+                EventTag.CompileSucceed.value,submissionId,JudgeResultTag.PD.value,"Compile succeed");
+
+        messageSender.judgeResultSender(message);
+    }
+
+    /**
+     * 编译失败时触发
+     * @param submissionId
+     */
+    public void onCompileFailed(String submissionId){
+
+        SubmissionNotifyMessage<String> message = SubmissionNotifyMessage.normal(
+                EventTag.CompileFailed.value,submissionId,JudgeResultTag.CE.value,"Compile Failed");
 
         messageSender.judgeResultSender(message);
     }
@@ -60,13 +76,17 @@ public class ApplicationNotifier {
     /**
      * 当一个Case评测完时触发 (显示：running on task[i+1] ...,并返回测试结果)
      *（对于每个Case的运行结果：不存储，不做持久化，只塞入消息队列返回给用户即时观看）
-     * @param resultCase
+     *
+     * (status 是"未完成态"（Pending）)
+     * @param resultTask
      */
-    public void onOneCaseFinished(ResultTaskCase resultCase,String submissionId){
+    public void onOneCaseFinished(ResultTask resultTask,String submissionId){
 
-        SubmissionNotifyMessage<ResultTaskCase> message = SubmissionNotifyMessage.normal(
-                EventTag.OneCaseFinished.value,submissionId,JudgeResultTag.PD.value,resultCase);
 
+        SubmissionNotifyMessage<ResultTask> message = SubmissionNotifyMessage.normal(
+                EventTag.OneCaseFinished.value,submissionId,JudgeResultTag.PD.value,resultTask);
+
+        // 注意：返回的也是 ResultTask
         messageSender.judgeResultSender(message);
     }
 
@@ -81,7 +101,8 @@ public class ApplicationNotifier {
         SubmissionResult submissionResult = new SubmissionResult();
         BeanUtils.copyProperties(resultTask,submissionResult);
         submissionResult.setSubmissionId(submissionId);
-        // 持久化入数据库
+
+        // task持久化工作不在 judge_core 做，统一在 web_server 做
         //submissionResultMapper.insert(submissionResult);
 
         SubmissionNotifyMessage<ResultTask> message = SubmissionNotifyMessage.normal(
@@ -90,6 +111,21 @@ public class ApplicationNotifier {
         messageSender.judgeResultSender(message);
 
     }
+
+
+    /**
+     * 拦截全局异常
+     *（输出"System error"）
+     * @param submissionId
+     */
+    public void onSystemError(String submissionId){
+
+        SubmissionNotifyMessage<String> message = SubmissionNotifyMessage.normal(
+                EventTag.SystemError.value,submissionId,JudgeResultTag.SE.value,"System error");
+
+        messageSender.judgeResultSender(message);
+    }
+
 
 
 }
