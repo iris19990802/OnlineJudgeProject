@@ -1,5 +1,6 @@
 package com.iris.java.onlinejudge.judger.pojo.bean;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +22,10 @@ public class ResultTask {
     private Integer currentTaskCase;
 
     private List<ResultTaskCase> resultTaskCaseList;
+
+    public ResultTask(){
+        resultTaskCaseList = new ArrayList<>();
+    }
 
 
     public void addResultCase(ResultTaskCase resultTaskCase){

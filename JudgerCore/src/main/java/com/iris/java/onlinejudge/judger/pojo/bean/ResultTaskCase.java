@@ -32,6 +32,7 @@ public class ResultTaskCase {
         this.errorMessage = errorMessage;
     }
 
+
     public Integer getCaseId() {
         return caseId;
     }

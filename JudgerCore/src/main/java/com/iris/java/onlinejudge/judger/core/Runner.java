@@ -85,6 +85,8 @@ public class Runner {
                 resultTask.setResultUsedTime(Math.max(resultTask.getResultUsedTime(),resultTaskCase.getTimeUsed()));
                 resultTask.setResultScore(resultTask.getResultScore() + taskCase.getScore());
             }
+
+            i += 1;
         }
 
         resultTask.setResultStatus(JudgeResultTag.AC.value);

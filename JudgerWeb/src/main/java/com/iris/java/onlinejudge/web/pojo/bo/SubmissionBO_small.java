@@ -4,6 +4,10 @@ package com.iris.java.onlinejudge.web.pojo.bo;
 // lombok 库的使用（免去Getter、Setter、构造函数）
 
 
+import com.iris.java.onlinejudge.web.Validator.IsLanguage;
+import com.iris.java.onlinejudge.web.Validator.IsProblem;
+import com.iris.java.onlinejudge.web.Validator.IsSecureCode;
+
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
@@ -12,12 +16,15 @@ import java.util.Date;
 public class SubmissionBO_small implements Serializable {
 
     @NotNull
+    @IsProblem
     private String problemId;
 
-
+    @NotNull
+    @IsSecureCode
     private String userCode;
 
     @NotNull
+    @IsLanguage
     private Integer languageId;
 
 
