@@ -22,7 +22,7 @@ public class Submission {
      * language_id
      */
     @Column(name = "language_id")
-    private String languageId;
+    private Integer languageId;
 
     /**
      * user_id
@@ -34,7 +34,7 @@ public class Submission {
      * submit_time
      */
     @Column(name = "submit_time")
-    private Date submitTime;
+    private Date submitDate;
 
     /**
      * user_code
@@ -83,7 +83,7 @@ public class Submission {
      *
      * @return language_id - language_id
      */
-    public String getLanguageId() {
+    public Integer getLanguageId() {
         return languageId;
     }
 
@@ -92,7 +92,7 @@ public class Submission {
      *
      * @param languageId language_id
      */
-    public void setLanguageId(String languageId) {
+    public void setLanguageId(Integer languageId) {
         this.languageId = languageId;
     }
 
@@ -119,17 +119,17 @@ public class Submission {
      *
      * @return submit_time - submit_time
      */
-    public Date getSubmitTime() {
-        return submitTime;
+    public Date getSubmitDate() {
+        return submitDate;
     }
 
     /**
      * 设置submit_time
      *
-     * @param submitTime submit_time
+     * @param submitDate submit_time
      */
-    public void setSubmitTime(Date submitTime) {
-        this.submitTime = submitTime;
+    public void setSubmitDate(Date submitDate) {
+        this.submitDate = submitDate;
     }
 
     /**

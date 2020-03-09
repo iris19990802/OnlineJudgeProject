@@ -10,6 +10,9 @@ import com.iris.java.onlinejudge.judger.pojo.db.ProblemCase;
 import com.iris.java.onlinejudge.judger.pojo.db.Problems;
 import com.iris.java.onlinejudge.judger.pojo.bean.Task;
 import com.iris.java.onlinejudge.judger.pojo.bo.SubmissionBO;
+import com.iris.java.onlinejudge.judger.service.LanguageService;
+import com.iris.java.onlinejudge.judger.service.ProblemCaseService;
+import com.iris.java.onlinejudge.judger.service.ProblemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -29,13 +32,13 @@ public class TaskFactory {
 
 
     @Autowired
-    LanguageMapper languageMapper;
+    LanguageService languageService;
 
     @Autowired
-    ProblemsMapper problemsMapper;
+    ProblemService problemService;
 
     @Autowired
-    ProblemCaseMapper problemCaseMapper;
+    ProblemCaseService problemCaseService;
 
     @Autowired
     Preprocessor preprocessor;
@@ -47,14 +50,11 @@ public class TaskFactory {
      */
     public Task getNewTaskFromSubmissionBO(SubmissionBO submissionBO){
 
-        Language language = languageMapper.selectByPrimaryKey(submissionBO.getLanguageId());
+        Language language = languageService.queryLanguageById(submissionBO.getLanguageId());
 
-        Problems problems = problemsMapper.selectByPrimaryKey(submissionBO.getProblemId());
+        Problems problems = problemService.queryProblemById(submissionBO.getProblemId());
 
-        Example example = new Example(ProblemCase.class);
-        Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("problemId",submissionBO.getProblemId());
-        List<ProblemCase> problemCases = problemCaseMapper.selectByExample(example);
+        List<ProblemCase> problemCases = problemCaseService.queryCasesByProblemId(submissionBO.getProblemId());
 
         String submissionId = submissionBO.getSubmissionId();
 

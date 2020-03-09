@@ -78,7 +78,7 @@ public class Task implements Iterable<TaskCase>{
         String userFileLocation = String.format("%s/%s",new Object[] {workDir, userCodeFileName});
 
         String compileCommand = language.getLanguageCompileCommand().replace("{filename}",userFileLocation);
-        //String runningCommand = language.getLanguageRunCommand().replace("{filename}",userFileLocation);
+
         String runningCommand = language.getLanguageRunCommand().replace("{filedir}",workDir);
         runningCommand = runningCommand.replace("{filename}",userCodeFileName);
 
@@ -103,17 +103,13 @@ public class Task implements Iterable<TaskCase>{
      *（用于判断compile是否生成可执行文件）
      *（因为C++ 难以判断 编译 warning 和 error）
      */
-    public String getRunningFilePath(){
-        String runningCommand = language.getLanguageRunCommand().replace("{filedir}",workDir);
-        runningCommand = runningCommand.replace("{filename}",userCodeFileName);
+    public String getCompileResultFilePath(){
+        // 用户提交代码的路径（不带语言后缀名）
+        String userFileLocation = String.format("%s/%s",new Object[] {workDir, userCodeFileName});
 
-        for(String tmp: runningCommand.split(" ")){
-            if(tmp.contains("/")){
-                return tmp;
-            }
-        }
-        return "";
+        String res = this.getLanguage().getLanguageCompileResultFile().replace("{filename}",userFileLocation);
 
+        return res;
 
     }
 

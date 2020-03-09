@@ -25,11 +25,22 @@ public class RabbitmqJudgeMessageReceiverImpl implements JudgerMessageReceiver {
     @RabbitListener(queues = RabbitmqConfig.JUDGE_RESULT_QUEUE)
     public void JudgeResultReceive(String submissionResultJSON) {
 
-        SubmissionNotifyMessage submissionNotifyMessage = JSON.parseObject(submissionResultJSON,SubmissionNotifyMessage.class);
+        try{
+            SubmissionNotifyMessage submissionNotifyMessage = JSON.parseObject(submissionResultJSON,SubmissionNotifyMessage.class);
 
-        System.out.printf("receive judge message of submission %s : %s\n",submissionNotifyMessage.getSubmissionId(),EventTag.getIndex(submissionNotifyMessage.getEventId()));
+            System.out.printf("receive judge message of submission %s : %s\n",submissionNotifyMessage.getSubmissionId(),EventTag.getIndex(submissionNotifyMessage.getEventId()));
 
-        messageHandleService.switchMessage(submissionNotifyMessage);
+            messageHandleService.switchMessage(submissionNotifyMessage);
+
+        }catch(Exception e){
+            /**
+             * 消息处理过程中产生了任何异常，都要catch住
+             *（若异常直接抛出，消息会一直重复消费下去）
+             */
+            e.printStackTrace();
+
+            // TODO：抛出全局异常。（使用全局异常拦截器）
+        }
 
     }
 

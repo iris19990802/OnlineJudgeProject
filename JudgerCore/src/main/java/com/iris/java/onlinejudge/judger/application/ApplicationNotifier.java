@@ -32,20 +32,20 @@ public class ApplicationNotifier {
      * @param submissionId
      */
     public void onSubmissionCreated(String submissionId){
-        SubmissionNotifyMessage<String> message = SubmissionNotifyMessage.normal(
-                EventTag.SubmissionCreated.value,submissionId,JudgeResultTag.PD.value,"start handling ...");
+        SubmissionNotifyMessage message = SubmissionNotifyMessage.normal(
+                EventTag.SubmissionCreated.value,submissionId,JudgeResultTag.PD.value,null);
 
-        messageSender.judgeResultSender(message);
+        //messageSender.judgeResultSender(message);
     }
     /**
      * 编译开始时触发(显示：Compling...)
      */
     public void onCompileStart(String submissionId){
 
-        SubmissionNotifyMessage<String> message = SubmissionNotifyMessage.normal(
-                EventTag.CompileStart.value,submissionId,JudgeResultTag.PD.value,"Compling ...");
+        SubmissionNotifyMessage message = SubmissionNotifyMessage.normal(
+                EventTag.CompileStart.value,submissionId,JudgeResultTag.PD.value,null);
 
-        messageSender.judgeResultSender(message);
+        //messageSender.judgeResultSender(message);
     }
 
     /**
@@ -54,10 +54,10 @@ public class ApplicationNotifier {
      */
     public void onCompileSucceed(String submissionId){
 
-        SubmissionNotifyMessage<String> message = SubmissionNotifyMessage.normal(
-                EventTag.CompileSucceed.value,submissionId,JudgeResultTag.PD.value,"Compile succeed");
+        SubmissionNotifyMessage message = SubmissionNotifyMessage.normal(
+                EventTag.CompileSucceed.value,submissionId,JudgeResultTag.PD.value,null);
 
-        messageSender.judgeResultSender(message);
+        //messageSender.judgeResultSender(message);
     }
 
     /**
@@ -66,8 +66,8 @@ public class ApplicationNotifier {
      */
     public void onCompileFailed(String submissionId){
 
-        SubmissionNotifyMessage<String> message = SubmissionNotifyMessage.normal(
-                EventTag.CompileFailed.value,submissionId,JudgeResultTag.CE.value,"Compile Failed");
+        SubmissionNotifyMessage message = SubmissionNotifyMessage.normal(
+                EventTag.CompileFailed.value,submissionId,JudgeResultTag.CE.value,null);
 
         messageSender.judgeResultSender(message);
     }
@@ -83,11 +83,11 @@ public class ApplicationNotifier {
     public void onOneCaseFinished(ResultTask resultTask,String submissionId){
 
 
-        SubmissionNotifyMessage<ResultTask> message = SubmissionNotifyMessage.normal(
+        SubmissionNotifyMessage message = SubmissionNotifyMessage.normal(
                 EventTag.OneCaseFinished.value,submissionId,JudgeResultTag.PD.value,resultTask);
 
         // 注意：返回的也是 ResultTask
-        messageSender.judgeResultSender(message);
+        //messageSender.judgeResultSender(message);
     }
 
     /**
@@ -105,7 +105,7 @@ public class ApplicationNotifier {
         // task持久化工作不在 judge_core 做，统一在 web_server 做
         //submissionResultMapper.insert(submissionResult);
 
-        SubmissionNotifyMessage<ResultTask> message = SubmissionNotifyMessage.normal(
+        SubmissionNotifyMessage message = SubmissionNotifyMessage.normal(
                 EventTag.TaskFinished.value,submissionId,resultTask.getResultStatus(),resultTask);
 
         messageSender.judgeResultSender(message);
@@ -120,8 +120,8 @@ public class ApplicationNotifier {
      */
     public void onSystemError(String submissionId){
 
-        SubmissionNotifyMessage<String> message = SubmissionNotifyMessage.normal(
-                EventTag.SystemError.value,submissionId,JudgeResultTag.SE.value,"System error");
+        SubmissionNotifyMessage message = SubmissionNotifyMessage.normal(
+                EventTag.SystemError.value,submissionId,JudgeResultTag.SE.value,null);
 
         messageSender.judgeResultSender(message);
     }

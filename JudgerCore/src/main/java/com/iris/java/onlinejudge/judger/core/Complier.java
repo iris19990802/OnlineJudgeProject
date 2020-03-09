@@ -25,7 +25,7 @@ public class Complier {
     @Autowired
     Executor executor;
 
-    public boolean compile(Task task){
+    public boolean compile(Task task) throws Exception{
 
         applicationNotifier.onCompileStart(task.getSubmissionId());
 
@@ -35,7 +35,7 @@ public class Complier {
         // 由于C++难以区分编译warning和error（都走标准错误输出，哪怕warnning也会有errorMsg，且exitCode都是0）
         // 这里用"是否生成可执行文件"为标准，来判断编译是否成功
 
-        File runningFile = new File(task.getRunningFilePath()); // 可执行文件路径
+        File runningFile = new File(task.getCompileResultFilePath()); // 编译生成的文件路径（可执行文件路径）
 
         if(runningFile.exists()){
             applicationNotifier.onCompileSucceed(task.getSubmissionId()); // 如果编译成功，则继续往下，此Case暂时还没完（Pending）
@@ -48,7 +48,7 @@ public class Complier {
     }
 
     // 暂时没有收集编译信息，只按照"普通的命令"来处理
-    private ExecuteResult getCompileResult(Task task) {
+    private ExecuteResult getCompileResult(Task task) throws Exception{
         String compileCommand = generateCompileCommand(task);
 
         //String compileLogOutputFilePath = task.getCompileLogFilePath();
@@ -56,11 +56,8 @@ public class Complier {
         String finalCompileCommand = compileCommand.replace(" ","@");
 
         ExecuteResult executeResult = null;
-        try {
-            executeResult = executor.normalExecute(finalCompileCommand);
-        }catch(Exception e){ // TODO: executor 出错处理（抛异常，或者 executeResult为null？）
-            e.printStackTrace();
-        }
+
+        executeResult = executor.normalExecute(finalCompileCommand);
 
         return executeResult;
     }

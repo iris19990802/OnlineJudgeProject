@@ -160,7 +160,7 @@ int run(char *args[],int timeLimit, int memoryLimit, char *in, char *out){
 
 void split( char **arr, char *str, const char *del){
 
-    char tmp[50];
+    char tmp[256];
     int tmp_p = 0;
 
     int cmd_p = 0;
@@ -194,7 +194,7 @@ int main(int argc,char *argv[])
 
     char *cmd[20];
     for(int i=0;i<20;i++){
-        cmd[i] = (char*)malloc(sizeof(char)*50);
+        cmd[i] = (char*)malloc(sizeof(char)*256);
     }
     // // 执行：
     // cmd[0] = "java";

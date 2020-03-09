@@ -42,23 +42,29 @@ public class Scheduler {
      * @param submissionBO
      * @throws Exception
      */
-    public void handleNewSubmission(SubmissionBO submissionBO){
+    public void handleNewSubmission(SubmissionBO submissionBO) throws Exception{
 
-        // 构建 Task
-        Task newTask = taskFactory.getNewTaskFromSubmissionBO(submissionBO);
-        applicationNotifier.onSubmissionCreated(newTask.getSubmissionId());
+        /**
+         * 同步上锁（目录、文件为共享资源，一次暂时只允许一个用户评测）
+         * TODO:优化锁粒度
+          */
+        synchronized (this){
+            // 构建 Task
+            Task newTask = taskFactory.getNewTaskFromSubmissionBO(submissionBO);
+            applicationNotifier.onSubmissionCreated(newTask.getSubmissionId());
 
-        // preprocess
-        preprocessor.preprocess(newTask,submissionBO.getUserCode());
+            // preprocess
+            preprocessor.preprocess(newTask,submissionBO.getUserCode());
 
-        // compile
-        if(complier.compile(newTask)){
-            // run
-            runner.runProgramWholeTask(newTask);
+            // compile
+            if(complier.compile(newTask)){
+                // run
+                runner.runProgramWholeTask(newTask);
+            }
+
+            // 清理临时目录
+            cleanDir(newTask);
         }
-
-        // 清理临时目录
-        cleanDir(newTask);
 
     }
 

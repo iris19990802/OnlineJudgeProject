@@ -5,5 +5,5 @@ import com.iris.java.onlinejudge.web.pojo.db.Language;
 
 public interface LanguageService {
 
-    public Language queryProblemById(String languageId);
+    public Language queryLanguageById(Integer languageId);
 }

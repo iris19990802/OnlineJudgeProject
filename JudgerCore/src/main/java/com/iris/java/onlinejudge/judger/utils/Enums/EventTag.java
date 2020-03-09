@@ -16,7 +16,7 @@ public enum EventTag {
 
     TaskFinished(5, "TaskFinished"),
 
-    SystemError(56, "SystemError");
+    SystemError(6, "SystemError");
 
     public final Integer value;
     public final String eventName;

@@ -101,7 +101,7 @@ public class CommandExecutor implements Executor{
         }
 
         // (Java 的编译错误会返回到"标准错误输出"，但是c++的编译错误不会。。)
-        String errorStream = IOUtils.toString(exec.getErrorStream(), "utf-8"); // inputStream 读为 String 的方法 ： https://blog.csdn.net/lmy86263/article/details/60479350
+        String errorStream = IOUtils.toString(exec.getErrorStream()); // inputStream 读为 String 的方法 ： https://blog.csdn.net/lmy86263/article/details/60479350
         String outStream = IOUtils.toString(exec.getInputStream(), "utf-8");
 
         CommandExecuteMessage res = new CommandExecuteMessage(errorStream,outStream);
@@ -117,9 +117,16 @@ public class CommandExecutor implements Executor{
 
             // 解析"标准输出"的内容
             JSONObject json = JSON.parseObject(execResult.getStdout());
+
             Integer status = json.getInteger("status");
             Long timeUsed = json.getLong("timeUsed");
             Long memoryUsed = json.getLong("memoryUsed");
+
+            /**
+             * json内不是期望的内容，会抛出 null pointer exception，也不要紧。
+             *
+             * 直接上抛给消息接受的入口函数，拦截返回system error 即可
+              */
 
             return new ExecuteResult(status, timeUsed, memoryUsed, "");
         }

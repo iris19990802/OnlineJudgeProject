@@ -29,7 +29,6 @@ public class RabbitmqMessageReceiverImpl implements  MessageReceiver{
         System.out.printf("receive submit message : %s\n",submissionJson);
 
 
-
         try {
             // 接到新请求，开始处理
             scheduler.handleNewSubmission(submissionBO);

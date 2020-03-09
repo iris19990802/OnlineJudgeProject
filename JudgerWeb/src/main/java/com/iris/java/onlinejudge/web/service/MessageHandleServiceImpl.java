@@ -3,6 +3,7 @@ package com.iris.java.onlinejudge.web.service;
 import com.iris.java.onlinejudge.web.controller.websocket.SubmitIdSubscribeServer;
 import com.iris.java.onlinejudge.web.mapper.normal.SubmissionResultMapper;
 import com.iris.java.onlinejudge.web.pojo.bean.ResultTask;
+import com.iris.java.onlinejudge.web.pojo.db.Submission;
 import com.iris.java.onlinejudge.web.pojo.db.SubmissionResult;
 import com.iris.java.onlinejudge.web.pojo.message.SubmissionNotifyMessage;
 import com.iris.java.onlinejudge.web.redis.PrefixKeys.SubmissionResultKey;
@@ -107,11 +108,10 @@ public class MessageHandleServiceImpl implements MessageHandleService{
     public void TaskFinished(SubmissionNotifyMessage submissionNotifyMessage) {
 
         // 持久化到数据库
+        ResultTask thisResult = submissionNotifyMessage.getData();
         SubmissionResult submissionResult = new SubmissionResult();
+        BeanUtils.copyProperties(thisResult,submissionResult);
         submissionResult.setSubmissionId(submissionNotifyMessage.getSubmissionId());
-
-        // 取出 ResultTask 类型的数据
-        BeanUtils.copyProperties((ResultTask)submissionNotifyMessage.getData(),submissionResult);
 
         submissionResultService.insertOneResult(submissionResult);
 
@@ -127,4 +127,5 @@ public class MessageHandleServiceImpl implements MessageHandleService{
         submissionResult.setResultStatus(JudgeResultTag.SE.value);
         submissionResultService.insertOneResult(submissionResult);
     }
+
 }

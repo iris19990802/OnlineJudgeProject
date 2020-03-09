@@ -16,7 +16,7 @@ public @interface IsLanguage {
 
     boolean required() default true;
 
-    String message() default "题目编号有误";
+    String message() default "编程语言有误";
 
     Class<?>[] groups() default {};
 

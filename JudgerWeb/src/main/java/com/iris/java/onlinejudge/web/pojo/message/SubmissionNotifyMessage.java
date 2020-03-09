@@ -14,10 +14,9 @@ import com.iris.java.onlinejudge.web.utils.Enums.JudgeResultTag;
  * 2、把它传给用户端（非终态则缓存，终态则入库）
  *
  */
-public class SubmissionNotifyMessage<T> {
+public class SubmissionNotifyMessage {
 
     // TODO : 是否需要定义错误时的返回方式？（this.error()）
-
 
     private String submissionId; //提交id
 
@@ -25,10 +24,10 @@ public class SubmissionNotifyMessage<T> {
 
     private Integer eventId; // 测评事件类型（枚举类），标志"显示给用户"的信息
 
-    private T data;// 具体数据（泛型）（如果事件是"TaskFinished/oneCaseFinished",则解析数据）
+    private ResultTask data;// 具体数据（如果事件是"TaskFinished/oneCaseFinished",则解析数据,否则为null）
 
 
-    public SubmissionNotifyMessage(Integer eventId, String submissionId, Integer status, T data) {
+    public SubmissionNotifyMessage(Integer eventId, String submissionId, Integer status, ResultTask data) {
         this.status = status;
         this.submissionId = submissionId;
         this.eventId = eventId;
@@ -39,11 +38,10 @@ public class SubmissionNotifyMessage<T> {
      * 业务正常时返回的消息
      * (即使Case出了问题，也是属于正常业务范围内的)
      * @param data
-     * @param <T>
      * @return
      */
-    public static <T> SubmissionNotifyMessage<T> normal(Integer eventId, String submissionId, Integer status, T data){
-        return new SubmissionNotifyMessage<T>(eventId,submissionId,status,data);
+    public static  SubmissionNotifyMessage normal(Integer eventId, String submissionId, Integer status, ResultTask data){
+        return new SubmissionNotifyMessage(eventId,submissionId,status,data);
     }
 
     /**
@@ -85,11 +83,11 @@ public class SubmissionNotifyMessage<T> {
         this.status = status;
     }
 
-    public T getData() {
+    public ResultTask getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public void setData(ResultTask data) {
         this.data = data;
     }
 

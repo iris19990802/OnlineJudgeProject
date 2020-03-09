@@ -8,8 +8,6 @@ application.properties
 
 logs/
 
-controller/
-
 target/
 
 workdir-irisoj/

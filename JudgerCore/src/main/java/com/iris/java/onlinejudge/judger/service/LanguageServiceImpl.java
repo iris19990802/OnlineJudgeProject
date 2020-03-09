@@ -1,7 +1,7 @@
-package com.iris.java.onlinejudge.web.service;
+package com.iris.java.onlinejudge.judger.service;
 
-import com.iris.java.onlinejudge.web.mapper.normal.LanguageMapper;
-import com.iris.java.onlinejudge.web.pojo.db.Language;
+import com.iris.java.onlinejudge.judger.mapper.normal.LanguageMapper;
+import com.iris.java.onlinejudge.judger.pojo.db.Language;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

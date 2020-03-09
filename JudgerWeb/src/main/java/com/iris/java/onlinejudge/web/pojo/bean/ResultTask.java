@@ -1,6 +1,8 @@
 package com.iris.java.onlinejudge.web.pojo.bean;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ResultTask {
 
@@ -16,6 +18,19 @@ public class ResultTask {
 
     private String errorMsg;
 
+    private List<ResultTaskCase> resultTaskCaseList;
+
+    public ResultTask(){
+        this.resultTaskCaseList = new ArrayList<>();
+    }
+
+    public List<ResultTaskCase> getResultTaskCaseList() {
+        return resultTaskCaseList;
+    }
+
+    public void setResultTaskCaseList(List<ResultTaskCase> resultTaskCaseList) {
+        this.resultTaskCaseList = resultTaskCaseList;
+    }
 
     public Long getResultUsedTime() {
         return resultUsedTime;

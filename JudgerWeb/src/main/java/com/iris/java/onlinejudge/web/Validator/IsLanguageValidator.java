@@ -9,7 +9,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 @Component
-public class IsLanguageValidator implements ConstraintValidator<IsLanguage, String>{
+public class IsLanguageValidator implements ConstraintValidator<IsLanguage, Integer>{
 
     private boolean required = false;
 
@@ -24,11 +24,11 @@ public class IsLanguageValidator implements ConstraintValidator<IsLanguage, Stri
     }
 
     @Override
-    public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(Integer value, ConstraintValidatorContext constraintValidatorContext) {
         if(required){
             return validatorUtil.isLanguage(value);
         }else{
-            if(StringUtils.isEmpty(value)){
+            if(value == null){
                 return true;
             }else{
                 return validatorUtil.isLanguage(value);

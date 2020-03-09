@@ -9,5 +9,6 @@
     <result column="langurage_name" property="langurageName" jdbcType="VARCHAR" />
     <result column="language_compile_command" property="languageCompileCommand" jdbcType="VARCHAR" />
     <result column="language_run_command" property="languageRunCommand" jdbcType="VARCHAR" />
+    <result column="language_compile_result_file" property="languageCompileResultFile" jdbcType="VARCHAR" />
   </resultMap>
 </mapper>

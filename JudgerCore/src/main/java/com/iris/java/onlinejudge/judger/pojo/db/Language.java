@@ -30,6 +30,13 @@ public class Language {
     @Column(name = "language_run_command")
     private String languageRunCommand;
 
+
+    /**
+     * language_compile_result_file
+     */
+    @Column(name = "language_compile_result_file")
+    private String languageCompileResultFile;
+
     /**
      * 获取代码文件的后缀名.
      * @return 代码文件的后缀名
@@ -45,6 +52,14 @@ public class Language {
             return sourceFileName.replaceAll("\\{filename\\}\\.", "");
         }
         return "";
+    }
+
+    public String getLanguageCompileResultFile() {
+        return languageCompileResultFile;
+    }
+
+    public void setLanguageCompileResultFile(String languageCompileResultFile) {
+        this.languageCompileResultFile = languageCompileResultFile;
     }
 
     /**

@@ -8,9 +8,9 @@ public enum JudgeResultTag {
     MLE(3 , "MLE", "Memory Limit Exceed"),
     WA(4 , "WA", "Wrong Answer"),
     RE(5 , "RE", "Runtime Error"),
-    OLE(6 , "OLE", "Output Limit Exceed"), // TODO
+    OLE(6 , "OLE", "Output Limit Exceed"),
     CE(7 , "CE", "Compile Error"),
-    SE(8 , "SE", "System Error"), // TODO
+    SE(8 , "SE", "System Error"),
     PD(9,"PD","Pending");
 
     public final Integer value;

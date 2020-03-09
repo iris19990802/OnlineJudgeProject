@@ -2,7 +2,9 @@ package com.iris.java.onlinejudge.judger.pojo.message;
 
 // 用于消息队列封装信息
 
-public class SubmissionNotifyMessage<T> {
+import com.iris.java.onlinejudge.judger.pojo.bean.ResultTask;
+
+public class SubmissionNotifyMessage {
 
     // TODO : 是否需要定义错误时的返回方式？（this.error()）
 
@@ -12,10 +14,10 @@ public class SubmissionNotifyMessage<T> {
 
     private Integer status; //正在评测的submission的状态(Pending? AC/CE/WA...?) —————— 通过这个来判断：是否是终态
 
-    private T data;// 具体数据（泛型）（如果状态是终态、事件是"TaskFinished/oneCaseFinished",则解析数据）
+    private ResultTask data;// 具体数据（泛型）（如果状态是终态、事件是"TaskFinished/oneCaseFinished",则解析数据）
 
 
-    public SubmissionNotifyMessage(Integer eventId, String submissionId, Integer status, T data) {
+    public SubmissionNotifyMessage(Integer eventId, String submissionId, Integer status, ResultTask data) {
         this.status = status;
         this.submissionId = submissionId;
         this.eventId = eventId;
@@ -26,11 +28,10 @@ public class SubmissionNotifyMessage<T> {
      * 业务正常时返回的消息
      * (即使Case出了问题，也是属于正常业务范围内的)
      * @param data
-     * @param <T>
      * @return
      */
-    public static <T> SubmissionNotifyMessage<T> normal(Integer eventId, String submissionId, Integer status, T data){
-        return new SubmissionNotifyMessage<T>(eventId,submissionId,status,data);
+    public static SubmissionNotifyMessage normal(Integer eventId, String submissionId, Integer status, ResultTask data){
+        return new SubmissionNotifyMessage(eventId,submissionId,status,data);
     }
 
     public Integer getEventId() {
@@ -57,11 +58,11 @@ public class SubmissionNotifyMessage<T> {
         this.status = status;
     }
 
-    public T getData() {
+    public ResultTask getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public void setData(ResultTask data) {
         this.data = data;
     }
 }

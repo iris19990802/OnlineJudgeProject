@@ -14,11 +14,11 @@ public class submissionTest {
     Scheduler scheduler;
 
     @Test
-    public void doTest(){
+    public void doTest() throws Exception{
 
         //scheduler.handleNewSubmission(SubmissionDemo.Cpp_AC_A_Plus_B);
 
-        //scheduler.handleNewSubmission(SubmissionDemo.Java_AC_A_Plus_B);
+        scheduler.handleNewSubmission(SubmissionDemo.Java_AC_A_Plus_B);
 
         //scheduler.handleNewSubmission(SubmissionDemo.Cpp_CE_A_Plus_B);
 
@@ -26,7 +26,7 @@ public class submissionTest {
 
         //scheduler.handleNewSubmission(SubmissionDemo.Cpp_WA_A_Plus_B);
 
-        scheduler.handleNewSubmission(SubmissionDemo.Cpp_TLE);
+        //scheduler.handleNewSubmission(SubmissionDemo.Cpp_TLE);
 
     }
 }
