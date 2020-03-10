@@ -22,8 +22,8 @@ public class CorsConfig {
           */
         CorsConfiguration config = new CorsConfiguration();
 
-        // 允许指定地址跨站请求 （前端运行在5000端口，允许前端请求）
-        config.addAllowedOrigin("http://localhost:5000");
+        // 允许指定地址跨站请求 （暂时允许所有）
+        config.addAllowedOrigin("*");
 
         // 允许请求携带一些附加信息（比如cookie）
         config.setAllowCredentials(true);

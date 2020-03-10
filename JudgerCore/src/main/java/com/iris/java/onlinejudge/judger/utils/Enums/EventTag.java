@@ -26,4 +26,22 @@ public enum EventTag {
         this.eventName = eventName;
     }
 
+
+    /**
+     * java 枚举 反向查找
+     *
+     *（通过type，得到枚举对象本身）
+     */
+    private static final HashMap<Integer,EventTag> mp = new HashMap<>();
+
+    static {
+        for(EventTag e : EnumSet.allOf(EventTag.class)){
+            mp.put(e.value, e);
+        }
+    }
+
+    public static EventTag getIndex(Integer id){
+        return mp.get(id);
+    }
+
 }

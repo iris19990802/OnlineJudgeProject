@@ -7,6 +7,8 @@ import com.iris.java.onlinejudge.web.pojo.bo.SubmissionBO_small;
 import com.iris.java.onlinejudge.web.pojo.db.Submission;
 import com.iris.java.onlinejudge.web.service.SubmissionService;
 import com.iris.java.onlinejudge.web.utils.JSONResult;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +20,8 @@ import javax.validation.Valid;
 import java.util.Date;
 import java.util.UUID;
 
-@RequestMapping("submission")
+@Api(value="提交接口",tags={"用户提交submission的请求接口"})
+@RequestMapping("/api/submission")
 @RestController
 public class SubmissionController {
 
@@ -28,8 +31,9 @@ public class SubmissionController {
     @Autowired
     SubmissionService submissionService;
 
+    @ApiOperation(value="用户提交代码",notes="用户提交代码",httpMethod = "POST")
     @PostMapping("/submit")
-    public JSONResult receiveNewTask(@RequestBody @Valid SubmissionBO_small submissionBO_small){
+    public JSONResult receiveNewTask(@RequestBody @Valid SubmissionBO_small submissionBO_small ){ // 完成参数校验
 
         // 生成 submissionId
         String submissionId = UUID.randomUUID().toString().replaceAll("-","");

@@ -20,7 +20,7 @@ import java.util.List;
 
 
 @Api(value="题目",tags={"查询题目相关信息的接口"})
-@RequestMapping("problems")
+@RequestMapping("/api/problems")
 @RestController
 public class ProblemController {
 
@@ -45,11 +45,9 @@ public class ProblemController {
             @ApiParam(name = "problemId",value="题目id",required = true)
             @PathVariable @IsProblem String problemId
     ){
-
-        if(StringUtils.isBlank(problemId)){
-            return JSONResult.errorMsg("题目不存在");
-        }
-
+        /**
+         * @IsProblem 已完成了problem 的参数校验
+         */
 
         Problems problem = problemService.queryProblemById(problemId);
 

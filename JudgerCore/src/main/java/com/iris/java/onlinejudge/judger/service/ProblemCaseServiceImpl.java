@@ -3,10 +3,12 @@ package com.iris.java.onlinejudge.judger.service;
 import com.iris.java.onlinejudge.judger.mapper.normal.ProblemCaseMapper;
 import com.iris.java.onlinejudge.judger.pojo.db.ProblemCase;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
+@Service
 public class ProblemCaseServiceImpl implements ProblemCaseService{
 
     @Autowired

@@ -37,7 +37,7 @@ public class Swagger2 {
                         "Liuyuexuan1999@126.com"))        // 联系人信息
                 .description("")  // 详细信息
                 .version("1.0.1")   // 文档版本号
-                .termsOfServiceUrl("https://www.lza1111.com") // 网站地址
+                //.termsOfServiceUrl("https://www.lza1111.com") // 网站地址
                 .build();
     }
 

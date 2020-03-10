@@ -104,6 +104,12 @@ public class CommandExecutor implements Executor{
         String errorStream = IOUtils.toString(exec.getErrorStream()); // inputStream 读为 String 的方法 ： https://blog.csdn.net/lmy86263/article/details/60479350
         String outStream = IOUtils.toString(exec.getInputStream(), "utf-8");
 
+        if(!StringUtils.isBlank(errorStream)){
+            System.out.println("execute error : " + errorStream);
+        }
+        if(exec.exitValue() != 0){
+            System.out.println("execute error : execCode = %d" + exec.exitValue());
+        }
         CommandExecuteMessage res = new CommandExecuteMessage(errorStream,outStream);
 
         return res;

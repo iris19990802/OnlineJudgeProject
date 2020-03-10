@@ -3,6 +3,7 @@ package com.iris.java.onlinejudge.web.controller.websocket;
 
 import com.alibaba.fastjson.JSON;
 import com.iris.java.onlinejudge.web.pojo.message.SubmissionNotifyMessage;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.OnClose;
@@ -18,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 
 // 订阅某submissionId
-@ServerEndpoint(value="/submission/querySubmitId/{submitId}")
+@ServerEndpoint(value="/ws/submission/querySubmitId/{submitId}")
 public class SubmitIdSubscribeServer {
 
     // 存储在线Session
