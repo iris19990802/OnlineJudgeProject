@@ -11,7 +11,7 @@ RUN  touch  /app/workdir/default/default-output.txt
 
 WORKDIR /app
 
-COPY onlinejudge.judger-1.0-SNAPSHOT.jar .
+COPY target/onlinejudge.judger-1.0-SNAPSHOT.jar .
 COPY judgecore.c ./script
 
 RUN gcc -o ./script/judgecore.c ./script/judgecore
