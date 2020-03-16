@@ -7,6 +7,7 @@ import com.iris.java.onlinejudge.web.pojo.bo.SubmissionBO_small;
 import com.iris.java.onlinejudge.web.pojo.db.Submission;
 import com.iris.java.onlinejudge.web.service.SubmissionService;
 import com.iris.java.onlinejudge.web.utils.JSONResult;
+import com.iris.java.onlinejudge.web.utils.UUIDUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -31,12 +32,15 @@ public class SubmissionController {
     @Autowired
     SubmissionService submissionService;
 
+    @Autowired
+    UUIDUtil uuidUtil;
+
     @ApiOperation(value="用户提交代码",notes="用户提交代码",httpMethod = "POST")
     @PostMapping("/submit")
     public JSONResult receiveNewTask(@RequestBody @Valid SubmissionBO_small submissionBO_small ){ // 完成参数校验
 
         // 生成 submissionId
-        String submissionId = UUID.randomUUID().toString().replaceAll("-","");
+        String submissionId = uuidUtil.getUUID();
 
         SubmissionBO submissionBO = new SubmissionBO();
         BeanUtils.copyProperties(submissionBO_small,submissionBO);
